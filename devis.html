@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire de devis</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      color: #333;
+      margin-top: 40px;
+    }
+    form {
+      background-color: #fff;
+      margin: 20px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      transition: all 0.3s ease;
+    }
+    h2 {
+      color: #007bff;
+      font-size: 24px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 5px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+    input[type="checkbox"] {
+      display: inline-block;
+      width: auto;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .checkbox-group label {
+      display: inline-block;
+      margin-right: 15px;
+      font-weight: normal;
+    }
+    .result {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    /* Ajout de la réactivité pour mobile */
+    @media (max-width: 600px) {
+      form {
+        padding: 15px;
+        width: 90%;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      button {
+        font-size: 16px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Demande de devis</h1>
+  <form id="formulaire-devis">
+    <!-- Section Informations sur la personne qui crée le devis -->
+    <div class="section">
+      <h2>Informations sur la personne qui crée le devis</h2>
+      <label for="nomCreateur">Nom :</label>
+      <input type="text" id="nomCreateur" name="nomCreateur" placeholder="Votre nom" required>
+
+      <label for="prenomCreateur">Prénom :</label>
+      <input type="text" id="prenomCreateur" name="prenomCreateur" placeholder="Votre prénom" required>
+
+      <label for="telephoneCreateur">Numéro de téléphone :</label>
+      <input type="tel" id="telephoneCreateur" name="telephoneCreateur" placeholder="Votre numéro de téléphone" required>
+
+      <label for="emailCreateur">Adresse e-mail :</label>
+      <input type="email" id="emailCreateur" name="emailCreateur" placeholder="Votre adresse e-mail" required>
+<label for="statutCreateur">Statut :</label>
+<select id="statutCreateur" name="statutCreateur">
+  <option value="proprietaire">Propriétaire</option>
+  <option value="locataire">Locataire</option>
+  <option value="autre">Autre</option>
+</select>
+<input type="text" id="autreStatutCreateur" name="autreStatutCreateur" placeholder="Précisez" style="display:none;">
+    </div>
+
+    <!-- Section Informations sur le destinataire du devis -->
+    <div class="section">
+      <h2>Informations sur le destinataire du devis</h2>
+      <label for="samePerson">
+        <input type="checkbox" id="samePerson" name="samePerson"> Même personne pour le destinataire
+      </label>
+
+      <label for="nomDestinataire">Nom du destinataire :</label>
+      <input type="text" id="nomDestinataire" name="nomDestinataire" placeholder="Nom du destinataire" required>
+
+      <label for="prenomDestinataire">Prénom du destinataire :</label>
+      <input type="text" id="prenomDestinataire" name="prenomDestinataire" placeholder="Prénom du destinataire" required>
+
+      <label for="telephoneDestinataire">Numéro de téléphone :</label>
+      <input type="tel" id="telephoneDestinataire" name="telephoneDestinataire" placeholder="Numéro de téléphone du destinataire" required>
+
+      <label for="emailDestinataire">Adresse e-mail :</label>
+      <input type="email" id="emailDestinataire" name="emailDestinataire" placeholder="Adresse e-mail du destinataire" required>
+<label for="statutDestinataire">Statut :</label>
+<select id="statutDestinataire" name="statutDestinataire">
+  <option value="proprietaire">Propriétaire</option>
+  <option value="locataire">Locataire</option>
+  <option value="autre">Autre</option>
+</select>
+<input type="text" id="autreStatutDestinataire" name="autreStatutDestinataire" placeholder="Précisez" style="display:none;">
+    </div>
+
+    <!-- Section Adresse du bien -->
+    <div class="section">
+      <h2>Adresse du bien</h2>
+      <label for="adresse">Adresse du bien :</label>
+      <input type="text" id="adresse" name="adresse" placeholder="Adresse du bien" required>
+
+      <label for="annee-construction">Année de construction du bien :</label>
+      <input type="number" id="annee-construction" name="annee-construction" placeholder="Année de construction" required>
+
+      <label for="superficie">Superficie du bien (en m²) :</label>
+      <input type="number" id="superficie" name="superficie" placeholder="Superficie en m²" required>
+
+      <label for="nombre-chambres">Nombre de chambres :</label>
+      <input type="number" id="nombre-chambres" name="nombre-chambres" placeholder="Nombre de chambres" required>
+    </div>
+
+    <!-- Section Type de bien -->
+    <div class="section">
+      <h2>Type de bien</h2>
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" name="typeBien" value="maison"> Maison
+        </label>
+        <label>
+          <input type="checkbox" name="typeBien" value="appartement"> Appartement
+        </label>
+        <label>
+          <input type="checkbox" name="typeBien" value="garage"> Garage
+        </label>
+        <label>
+          <input type="checkbox" name="typeBien" value="terrain"> Terrain
+        </label>
+      </div>
+    </div>
+
+    <!-- Section Nature de la demande -->
+    <div class="section">
+      <h2>Nature de la demande</h2>
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" name="natureDemande" value="vente"> Vente
+        </label>
+        <label>
+          <input type="checkbox" name="natureDemande" value="location"> Location
+        </label>
+        <label>
+          <input type="checkbox" name="natureDemande" value="etude-sol"> Étude de sol
+        </label>
+      </div>
+    </div>
+
+    <!-- Section Type de chauffage -->
+    <div class="section">
+      <h2>Type de chauffage</h2>
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" name="chauffage" value="electrique"> Chauffage électrique
+        </label>
+        <label>
+          <input type="checkbox" name="chauffage" value="gaz"> Chauffage au gaz
+        </label>
+        <label>
+          <input type="checkbox" name="chauffage" value="fioul"> Chauffage au fioul
+        </label>
+        <label>
+          <input type="checkbox" name="chauffage" value="central"> Chauffage central
+        </label>
+      </div>
+    </div>
+
+    <!-- Section Diagnostics demandés -->
+    <div class="section">
+      <h2>Diagnostics demandés</h2>
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" name="diagnostic" value="termite"> Termite
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="plomb"> Plomb
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="amiante"> Amiante
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="dpe"> DPE (Diagnostic de Performance Énergétique)
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="electrique"> Électrique
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="gaz"> Gaz
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="erp"> ERP (État des Risques et Pollution)
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="carrez"> Carrez (Surface Loi Carrez)
+        </label>
+        <label>
+          <input type="checkbox" name="diagnostic" value="boutin"> Boutin (Surface Loi Boutin)
+        </label>
+      </div>
+    </div>
+
+    <button type="button" id="envoyer-btn">Envoyer</button>
+  </form>
+
+  <!-- Zone pour afficher les résultats -->
+  <div id="result" class="result"></div>
+
+  <script>
+    document.getElementById("samePerson").addEventListener("change", function() {
+      if (this.checked) {
+        // Copier les informations du créateur vers le destinataire
+        document.getElementById("nomDestinataire").value = document.getElementById("nomCreateur").value;
+        document.getElementById("prenomDestinataire").value = document.getElementById("prenomCreateur").value;
+        document.getElementById("telephoneDestinataire").value = document.getElementById("telephoneCreateur").value;
+        document.getElementById("emailDestinataire").value = document.getElementById("emailCreateur").value;
+        
+        // Rendre les champs destinataire non modifiables
+        document.getElementById("nomDestinataire").disabled = true;
+        document.getElementById("prenomDestinataire").disabled = true;
+        document.getElementById("telephoneDestinataire").disabled = true;
+        document.getElementById("emailDestinataire").disabled = true;
+      } else {
+        // Réactiver les champs du destinataire si la case est décochée
+        document.getElementById("nomDestinataire").disabled = false;
+        document.getElementById("prenomDestinataire").disabled = false;
+        document.getElementById("telephoneDestinataire").disabled = false;
+        document.getElementById("emailDestinataire").disabled = false;
+      }
+    });
+
+    document.getElementById("envoyer-btn").addEventListener("click", function() {
+      const nomCreateur = document.getElementById("nomCreateur").value;
+      const prenomCreateur = document.getElementById("prenomCreateur").value;
+      const telephoneCreateur = document.getElementById("telephoneCreateur").value;
+      const emailCreateur = document.getElementById("emailCreateur").value;
+      
+      const nomDestinataire = document.getElementById("nomDestinataire").value;
+      const prenomDestinataire = document.getElementById("prenomDestinataire").value;
+      const telephoneDestinataire = document.getElementById("telephoneDestinataire").value;
+      const emailDestinataire = document.getElementById("emailDestinataire").value;
+      
+      const adresse = document.getElementById("adresse").value;
+      const anneeConstruction = document.getElementById("annee-construction").value;
+      const superficie = document.getElementById("superficie").value;
+      const nombreChambres = document.getElementById("nombre-chambres").value;
+
+      const typesBien = Array.from(document.querySelectorAll('input[name="typeBien"]:checked'))
+                              .map(checkbox => checkbox.value);
+      const naturesDemande = Array.from(document.querySelectorAll('input[name="natureDemande"]:checked'))
+                                  .map(checkbox => checkbox.value);
+      const chauffages = Array.from(document.querySelectorAll('input[name="chauffage"]:checked'))
+                              .map(checkbox => checkbox.value);
+      const diagnostics = Array.from(document.querySelectorAll('input[name="diagnostic"]:checked'))
+                               .map(checkbox => checkbox.value);
+      
+      const resultHTML = 
+        <h2>Résumé du devis</h2>
+        <p><strong>Créateur du devis :</strong> ${prenomCreateur} ${nomCreateur} (${telephoneCreateur}, ${emailCreateur})</p>
+        <p><strong>Destinataire du devis :</strong> ${prenomDestinataire} ${nomDestinataire} (${telephoneDestinataire}, ${emailDestinataire})</p>
+        <p><strong>Adresse du bien :</strong> ${adresse}</p>
+        <p><strong>Année de construction :</strong> ${anneeConstruction}</p>
+        <p><strong>Superficie :</strong> ${superficie} m²</p>
+        <p><strong>Nombre de chambres :</strong> ${nombreChambres}</p>
+        <p><strong>Types de bien :</strong> ${typesBien.join(", ")}</p>
+        <p><strong>Nature de la demande :</strong> ${naturesDemande.join(", ")}</p>
+        <p><strong>Type de chauffage :</strong> ${chauffages.join(", ")}</p>
+        <p><strong>Diagnostics demandés :</strong> ${diagnostics.join(", ")}</p>
+      ;
+      
+      document.getElementById("result").innerHTML = resultHTML;
+    });
+  </script>
+<script>
+  document.getElementById("samePerson").addEventListener("change", function() {
+    if (this.checked) {
+      // Copier les informations du créateur vers le destinataire
+      document.getElementById("nomDestinataire").value = document.getElementById("nomCreateur").value;
+      document.getElementById("prenomDestinataire").value = document.getElementById("prenomCreateur").value;
+      document.getElementById("telephoneDestinataire").value = document.getElementById("telephoneCreateur").value;
+      document.getElementById("emailDestinataire").value = document.getElementById("emailCreateur").value;
+      
+      // Rendre les champs destinataire non modifiables
+      document.getElementById("nomDestinataire").disabled = true;
+      document.getElementById("prenomDestinataire").disabled = true;
+      document.getElementById("telephoneDestinataire").disabled = true;
+      document.getElementById("emailDestinataire").disabled = true;
+    } else {
+      // Réactiver les champs du destinataire si la case est décochée
+      document.getElementById("nomDestinataire").disabled = false;
+      document.getElementById("prenomDestinataire").disabled = false;
+      document.getElementById("telephoneDestinataire").disabled = false;
+      document.getElementById("emailDestinataire").disabled = false;
+    }
+  });
+
+  // Ajout de la logique pour vérifier l'année de construction et cocher Amiante et Plomb
+  document.getElementById("annee-construction").addEventListener("input", function() {
+    const anneeConstruction = parseInt(this.value);
+
+    // Cocher Amiante si l'année de construction est avant 1997
+    if (anneeConstruction < 1997) {
+      document.querySelector('input[name="diagnostic"][value="amiante"]').checked = true;
+    } else {
+      document.querySelector('input[name="diagnostic"][value="amiante"]').checked = false;
+    }
+
+    // Cocher Plomb si l'année de construction est avant 1949
+    if (anneeConstruction < 1949) {
+      document.querySelector('input[name="diagnostic"][value="plomb"]').checked = true;
+    } else {
+      document.querySelector('input[name="diagnostic"][value="plomb"]').checked = false;
+    }
+  });
+
+  document.getElementById("envoyer-btn").addEventListener("click", function() {
+    const nomCreateur = document.getElementById("nomCreateur").value;
+    const prenomCreateur = document.getElementById("prenomCreateur").value;
+    const telephoneCreateur = document.getElementById("telephoneCreateur").value;
+    const emailCreateur = document.getElementById("emailCreateur").value;
+    
+    const nomDestinataire = document.getElementById("nomDestinataire").value;
+    const prenomDestinataire = document.getElementById("prenomDestinataire").value;
+    const telephoneDestinataire = document.getElementById("telephoneDestinataire").value;
+    const emailDestinataire = document.getElementById("emailDestinataire").value;
+    
+    const adresse = document.getElementById("adresse").value;
+    const anneeConstruction = document.getElementById("annee-construction").value;
+    const superficie = document.getElementById("superficie").value;
+    const nombreChambres = document.getElementById("nombre-chambres").value;
+
+    const typesBien = Array.from(document.querySelectorAll('input[name="typeBien"]:checked'))
+                              .map(checkbox => checkbox.value);
+    const naturesDemande = Array.from(document.querySelectorAll('input[name="natureDemande"]:checked'))
+                                  .map(checkbox => checkbox.value);
+    const chauffages = Array.from(document.querySelectorAll('input[name="chauffage"]:checked'))
+                              .map(checkbox => checkbox.value);
+    const diagnostics = Array.from(document.querySelectorAll('input[name="diagnostic"]:checked'))
+                               .map(checkbox => checkbox.value);
+    
+    const resultHTML = 
+      <h2>Résumé du devis</h2>
+      <p><strong>Créateur du devis :</strong> ${prenomCreateur} ${nomCreateur} (${telephoneCreateur}, ${emailCreateur})</p>
+      <p><strong>Destinataire du devis :</strong> ${prenomDestinataire} ${nomDestinataire} (${telephoneDestinataire}, ${emailDestinataire})</p>
+      <p><strong>Adresse du bien :</strong> ${adresse}</p>
+      <p><strong>Année de construction :</strong> ${anneeConstruction}</p>
+      <p><strong>Superficie :</strong> ${superficie} m²</p>
+      <p><strong>Nombre de chambres :</strong> ${nombreChambres}</p>
+      <p><strong>Types de bien :</strong> ${typesBien.join(", ")}</p>
+      <p><strong>Nature de la demande :</strong> ${naturesDemande.join(", ")}</p>
+      <p><strong>Type de chauffage :</strong> ${chauffages.join(", ")}</p>
+      <p><strong>Diagnostics demandés :</strong> ${diagnostics.join(", ")}</p>
+    ;
+    
+    document.getElementById("result").innerHTML = resultHTML;
+  });
+</script>
+</body>
+</html>
